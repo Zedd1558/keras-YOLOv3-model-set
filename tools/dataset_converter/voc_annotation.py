@@ -23,12 +23,15 @@ def convert_annotation(dataset_path, year, image_id, list_file, include_difficul
         else:
             difficult = difficult.text
         class_name = obj.find('name').text
-        if class_name not in classes:
+#         if class_name not in classes:
+#             continue
+        if class_name != "person":
             continue
         if not include_difficult and int(difficult)==1:
             continue
-        class_id = classes.index(class_name)
-
+#         class_id = classes.index(class_name)
+        class_id = 0
+    
         # parse box coordinate to (xmin,ymin,xmax,ymax) format
         xml_box = obj.find('bndbox')
         box = (int(xml_box.find('xmin').text), int(xml_box.find('ymin').text), int(xml_box.find('xmax').text), int(xml_box.find('ymax').text))
@@ -58,7 +61,9 @@ def has_object(dataset_path, year, image_id, include_difficult):
         else:
             difficult = difficult.text
         class_name = obj.find('name').text
-        if class_name not in classes:
+#         if class_name not in classes:
+#             continue
+        if class_name != "person":
             continue
         if not include_difficult and int(difficult)==1:
             continue
