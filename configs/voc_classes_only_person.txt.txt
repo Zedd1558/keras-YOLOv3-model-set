@@ -1,0 +1,18 @@
+CNN training 
+- train the CNN with weighted Sampling ( also weight er difference khub beshi hoa o thik na oita ektu smooth kora better, naile boro class gula pathabei na data loader )
+- I tried CNN efficientb0 , efficientnetb1 might work better
+- Check if the data augmentations are too drastic or not
+
+YOLO training
+- I got better using the largest 5x model and less with 5m. So, either we need to use 5x or 5l. I trained with SGD, maybe try it with adam.
+- Last time I got mAP 35% in the valid, we need to try to beat that.
+
+
+COMBINING YOLO and CNN
+- YOLO gives a label, CNN gives a label. 
+	- I tried a)only CNN label... b)only YOLO label... c)only keeping the boxes which YOLO==CNN label
+- Maybe combine the soft labels instead of hardones,
+	- YOLO gives a confidence score (probably its separate from the softmax labels)  and a softmax distribution of classes ( NOT Sure, study YOLO outputs)
+	- CNN gives softmax scores 
+		- 1 approach might be 
+maybe ignore CNN label if CNN softmax score not very high for the selected class, in that case use YOLO label, else use CNN labels.
