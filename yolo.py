@@ -94,7 +94,7 @@ class YOLO_np(object):
             
             dot_img_file = 'model_architecture.jpg'
             print('> plotting the model architecture and saving at ', dot_img_file)
-            plot_model(model, to_file=dot_img_file, show_shapes=True)
+            plot_model(yolo_model, to_file=dot_img_file, show_shapes=True)
 
         except Exception as e:
             print(repr(e))
