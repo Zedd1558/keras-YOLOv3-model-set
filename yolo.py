@@ -24,6 +24,7 @@ from yolo2.postprocess_np import yolo2_postprocess_np
 from common.data_utils import preprocess_image
 from common.utils import get_classes, get_anchors, get_colors, draw_boxes, optimize_tf_gpu
 from tensorflow.keras.utils import multi_gpu_model
+from tensorflow.keras.utils import plot_model
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['CUDA_VISIBLE_DEVICES'] = '0'
@@ -88,7 +89,13 @@ class YOLO_np(object):
             yolo_model.load_weights(weights_path) # make sure model, anchors and classes match
             if self.pruning_model:
                 yolo_model = sparsity.strip_pruning(yolo_model)
+            
             yolo_model.summary()
+            
+            dot_img_file = 'model_architecture.jpg'
+            print('> plotting the model architecture and saving at ', dot_img_file)
+            plot_model(model, to_file=dot_img_file, show_shapes=True)
+
         except Exception as e:
             print(repr(e))
             assert yolo_model.layers[-1].output_shape[-1] == \
@@ -286,6 +293,7 @@ def detect_img(yolo):
             continue
         else:
             r_image = yolo.detect_image(image)
+            r_image.save("TEST.jpg")
             r_image.show()
 
 
