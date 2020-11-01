@@ -160,7 +160,8 @@ def main(args):
         # get normal train model
         model = get_train_model(args.model_type, anchors, num_classes, weights_path=args.weights_path, freeze_level=freeze_level, optimizer=optimizer, label_smoothing=args.label_smoothing, elim_grid_sense=args.elim_grid_sense, model_pruning=args.model_pruning, pruning_end_step=pruning_end_step)
 
-    model.summary()
+    #     model.summary()
+    print('> the model has', model.count_params(), 'parameters.')
 
     # Transfer training some epochs with frozen layers first if needed, to get a stable loss.
     initial_epoch = args.init_epoch
