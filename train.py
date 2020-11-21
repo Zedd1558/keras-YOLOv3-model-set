@@ -53,11 +53,11 @@ def main(args):
     checkpoint = ModelCheckpoint(os.path.join(log_dir, 'best.h5'),
         monitor='val_loss',
         mode='min',
-        verbose=1,
+        verbose=0,
         save_weights_only=False,
         save_best_only=True,
         period=1)
-    drive_checkpoint = ModelCheckpoint("/gdrive/My Drive/THESIS/Data/YOLO_MODELS/latest_yolo3_train_model.h5",
+    drive_checkpoint = ModelCheckpoint("/gdrive/My Drive/THESIS/Data/YOLO_MODELS/latest_tiny_yolo3_mobilenetv3small_ultralite_train_model.h5",
         monitor='val_loss',
         mode='min',
         verbose=1,
